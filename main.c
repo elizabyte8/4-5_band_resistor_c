@@ -5,7 +5,7 @@
 
 // #define NUMBER_OF_TOTAL_COLOURS 13
 #define NUMBER_OF_COLOURS 11
-#define NUMBER_OF_TOLERANCE 3 // [N] will be in main() func
+#define NUMBER_OF_TOLERANCE 3 
 
 char *interface [] = 
 {
@@ -24,6 +24,117 @@ char *interface [] =
 "\n|    NO COLOUR    |     |        NONE  tap[N]------->    20%    ----> tap [N]"
 "\n*-----------------*     *--------------------*      *-----------*",
 };// ascii interface
+
+// funcs
+char users_input(int index);
+int gold_or_gray(char band_colour, int index);
+unsigned long long int_converter(char colour, int digit_order_number);
+float float_converter(char colour);
+
+
+int main ()// START of MAIN
+{
+//___data_segment
+
+ char first_colour, second_colour;// first two or three colours values
+ char third_colour = '0';// if (number == 4) means the resistor is 4-band. So, we need two colours. 
+ char fourth_colour, fifth_colour;// colours of multiplier and tolerance 
+ char tolerance_colour;
+ int  number, index, digit_order_number, g0ld_or_gray = -1, tolerance = 5, ENTER;
+ unsigned long hundreds, tens, ones, multiplier_int;
+ unsigned long long result_int;
+ float multiplier_float, result_float;
+//___code_segment
+
+  printf("\nHello, user!\nThis program is here to help you to find out the value (Ohms) of your resistor.\n\n"); 
+  printf("All you need is to know the colours of your resistor.\n\nGive the desired number of bands (4 or 5 only)\n"); 
+   scanf("%d",&number);
+
+ while(number!= 4 && number!= 5)
+ {// checks if there are other numbers than 4 and 5
+  printf("4 or 5 only. Try again!\n");
+   scanf("%d", &number);
+    scanf("%d",&ENTER);  
+ }
+
+  printf("\nNow look at the table\nAND\nChoose colours which match to the value.");
+  printf("\n\n\n\t\t\t\t     <<Table of colours and their values>>\n\n");
+  for(int i = 0; i < 12; i++)// prints ascii interface with colours values
+  printf("%s", interface[i]); 
+  printf("\n\nChoose the colours");
+
+//___1rd_band_(colour)_segment
+ index = 1, digit_order_number = 2;
+ first_colour = users_input(index);
+ g0ld_or_gray = gold_or_gray(first_colour, index);
+ hundreds = int_converter(first_colour, digit_order_number);
+
+//___2nd_band_(colour)_segment
+ index = 2, digit_order_number = 1; 
+ second_colour = users_input(index);
+ g0ld_or_gray = gold_or_gray(second_colour, index);
+ tens = int_converter(second_colour, digit_order_number);
+
+//___3rd_band_(colour)_segment
+ if(number == 5)
+ {
+  index = 3, digit_order_number = 0;
+  third_colour = users_input(index);
+  g0ld_or_gray = gold_or_gray(third_colour, index);
+  ones = int_converter(third_colour, digit_order_number);
+ }
+ else
+ ones = 0;
+
+//___4th_band_(multiplier)_segment
+ index = 4, digit_order_number = -1;
+ fourth_colour = users_input(index);
+ g0ld_or_gray = gold_or_gray(fourth_colour, index);
+  if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
+   multiplier_int = int_converter(fourth_colour, digit_order_number);
+  else
+   multiplier_float = float_converter(fourth_colour);
+
+//___5th_band_tolerance_segment
+  printf("\nThe TOLERANCE has the colour of: ");
+    scanf("%d", &ENTER);
+   scanf("%c",&tolerance_colour);
+   tolerance_colour = toupper(tolerance_colour);
+   switch(tolerance_colour)
+   {
+    case 'S':
+     tolerance *= 2;
+    case 'N':
+     tolerance *= 4;
+   }
+
+//___total_value_segment
+// if the result is int type
+if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
+ {
+ result_int = (hundreds + tens + ones)*multiplier_int;
+
+  printf("\nThe value of your resistor is: "); 
+  if(result_int >= 1000000000)
+  printf("%.llu Giga Ohms +- %d", (result_int/1000000000), tolerance);
+  if(result_int >= 1000000 && result_int < 1000000000)
+  printf("%.2llu Mega Ohms +- %d",(result_int/1000000), tolerance);
+  if(result_int >= 1000 && result_int < 1000000)
+  printf("%.2llu kilo Ohms +- %d",(result_int/1000), tolerance);
+  if(result_int < 1000)
+  printf("%.llu Ohms +- %d", result_int, tolerance);
+ }
+// if the result is float type
+ if(g0ld_or_gray == 1)
+  {
+ result_float = ((hundreds + tens + ones)*multiplier_float);
+
+  printf("\nThe value of your resistor is: "); 
+  printf("%.2f Ohms +- %d", result_float, tolerance);
+  }
+ 
+return 0;
+}// END of MAIN
 
 
 char users_input(int index)// START of func
@@ -121,108 +232,3 @@ float float_converter(char colour)// START of func
 
 return band_value;
 }// END of func
-
-
-int main ()// START of MAIN
-{
-//___data_segment
-
- char first_colour, second_colour;// first two or three colours values
- char third_colour = '0';// if (number == 4) means the resistor is 4-band. So, we need two colours. 
- char fourth_colour, fifth_colour;// colours of multiplier and tolerance 
- char tolerance_colour;
- int  number, index, digit_order_number, g0ld_or_gray = -1, tolerance = 5, ENTER;
- unsigned long hundreds, tens, ones, multiplier_int;
- unsigned long long result_int;
- float multiplier_float, result_float;
-//___code_segment
-
-  printf("\nHello, user!\nThis program is here to help you to find out the value (Ohms) of your resistor.\n\n"); 
-  printf("All you need is to know the colours of your resistor.\n\nGive the desired number of bands (4 or 5 only)\n"); 
-   scanf("%d",&number);
-
- while(number!= 4 && number!= 5)
- {// checks if there are other numbers than 4 and 5
-  printf("4 or 5 only. Try again!\n");
-   scanf("%d", &number);
-    scanf("%d",&ENTER);  
- }
-
-  printf("\nNow look at the table\nAND\nChoose colours which match to the value.");
-  printf("\n\n\n\t\t\t\t     <<Table of colours and their values>>\n\n");
-  for(int i = 0; i < 12; i++)// prints ascii interface with colours values
-  printf("%s", interface[i]); 
-  printf("\n\nChoose the colours");
-
-//___1rd_band_(colour)_segment
- index = 1, digit_order_number = 2;
- first_colour = users_input(index);
- g0ld_or_gray = gold_or_gray(first_colour, index);
- hundreds = int_converter(first_colour, digit_order_number);
-
-//___2nd_band_(colour)_segment
- index = 2, digit_order_number = 1; 
- second_colour = users_input(index);
- g0ld_or_gray = gold_or_gray(second_colour, index);
- tens = int_converter(second_colour, digit_order_number);
-
-//___3rd_band_(colour)_segment
- if(number == 5)
- {
-  index = 3, digit_order_number = 0;
-  third_colour = users_input(index);
-  g0ld_or_gray = gold_or_gray(third_colour, index);
-  ones = int_converter(third_colour, digit_order_number);
- }
- else
- ones = 0;
-
-//___4th_band_(multiplier)_segment
- index = 4, digit_order_number = -1;
- fourth_colour = users_input(index);
- g0ld_or_gray = gold_or_gray(fourth_colour, index);
-  if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
-   multiplier_int = int_converter(fourth_colour, digit_order_number);
-  else
-   multiplier_float = float_converter(fourth_colour);
-
-//___5th_band_tolerance_segment
-  printf("\nThe TOLERANCE has the colour of: ");
-    scanf("%d", &ENTER);
-   scanf("%c",&tolerance_colour);
-   tolerance_colour = toupper(tolerance_colour);
-   switch(tolerance_colour)
-   {
-    case 'S':
-     tolerance *= 2;
-    case 'N':
-     tolerance *= 4;
-   }
-   
-//___total_value_segment
-// if the result is int type
-if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
- {
- result_int = (hundreds + tens + ones)*multiplier_int;
-
-  printf("\nThe value of your resistor is: "); 
-  if(result_int >= 1000000000)
-  printf("%.llu Giga Ohms +- %d", (result_int/1000000000), tolerance);
-  if(result_int >= 1000000 && result_int < 1000000000)
-  printf("%.2llu Mega Ohms +- %d",(result_int/1000000), tolerance);
-  if(result_int >= 1000 && result_int < 1000000)
-  printf("%.2llu kilo Ohms +- %d",(result_int/1000), tolerance);
-  if(result_int < 1000)
-  printf("%.llu Ohms +- %d", result_int, tolerance);
- }
-// if the result is float type
- if(g0ld_or_gray == 1)
-  {
- result_float = ((hundreds + tens + ones)*multiplier_float);
-
-  printf("\nThe value of your resistor is: "); 
-  printf("%.2f Ohms +- %d", result_float, tolerance);
-  }
- 
-return 0;
-}// END of MAIN
