@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h> // for func
+#include <stdlib.h> // I could use atoi(), but I won't
+// because this code was written 12 months ago (when I was unexperciend at programming [just a 4-month baby], I didn't know
+// about that func xD
 #include <ctype.h>  // for func toupper()
 #include <math.h>   // for func pow()
 
