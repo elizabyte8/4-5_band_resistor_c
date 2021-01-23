@@ -44,8 +44,9 @@ int main ()// START of MAIN
  unsigned long hundreds, tens, ones, multiplier_int;
  unsigned long long result_int;
  float multiplier_float, result_float;
+ 
 //___code_segment
-
+ 
   printf("\nHello, user!\nThis program is here to help you to find out the value (Ohms) of your resistor.\n\n"); 
   printf("All you need is to know the colours of your resistor.\n\nGive the desired number of bands (4 or 5 only)\n"); 
    scanf("%d",&number);
