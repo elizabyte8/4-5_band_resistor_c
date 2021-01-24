@@ -95,7 +95,7 @@ int main ()// START of MAIN
   else
    multiplier_float = float_converter(multiplier_colour);
 
-//___5th_band_tolerance_segment
+//___5th_band_(tolerance)_segment
  do
  {
   printf("\n\nThe TOLERANCE has the colour of\n(only [G]old, [S]ilver & [N]one): ");
