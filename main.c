@@ -2,7 +2,6 @@
 *** Title: rEsIsToЯ_bAnD_сОl0ur_CoDe__CaLcUlAt0Я ************
 *** Author: cold_summer aka Elizabeth Maslennikova **********
 *** Date: ~01/12/2019 *************************************** yes, it was written in 2019
-*** Description: Save my farm from rodents invasion *********
 ************************************************************/
 
 #include <stdio.h>
