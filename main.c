@@ -105,12 +105,18 @@ int main ()// START of MAIN
 //___5th_band_(tolerance)_segment
  do
  {
-  printf("\n\nThe TOLERANCE has the colour of\n(only [G]old, [S]ilver & [N]one): ");
+  printf("\n\nThe TOLERANCE has the colour of\n(only [C]OFFEE, [R]ED, [G]OLD, [S]ILVER & [N]ONE): ");
     scanf("%d", &ENTER);
    scanf("%c",&tolerance_colour);
    tolerance_colour = toupper(tolerance_colour);
    switch(tolerance_colour)
-   {
+   { 
+    case 'C':
+     tolerance_int = tolerance_int/tolerance_int;
+     break;
+    case 'R':
+     tolerance_int = 2;
+     break;
     case 'G':
      tolerance_int *= 1;
      break;
@@ -120,8 +126,9 @@ int main ()// START of MAIN
     case 'N':
      tolerance_int *= 4;
      break;
+   
    }
- }while(tolerance_colour!='G' && tolerance_colour!='S' && tolerance_colour!='N');
+ }while(tolerance_colour!='C' && tolerance_colour!='R' && tolerance_colour!='G' && tolerance_colour!='S' && tolerance_colour!='N');
 
 //___total_value_segment
 // if the result is int type
