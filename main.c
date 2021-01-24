@@ -28,8 +28,8 @@ char *interface [] =
 // funcs
 char users_input(int index);
 int gold_or_gray(char band_colour, int index);
-unsigned long long int_converter(char colour, int digit_order_number);
-float float_converter(char colour);
+unsigned long long int_converter(char band_colour, int digit_order_number);
+float float_converter(char band_colour);
 
 
 int main ()// START of MAIN 
@@ -38,12 +38,12 @@ int main ()// START of MAIN
 
  char first_colour, second_colour;// first two or three colours values
  char third_colour = '0';// if (number == 4) means the resistor is 4-band. So, we need two colours. 
- char fourth_colour, fifth_colour;// colours of multiplier and tolerance 
- char tolerance_colour;
- int  number, index, digit_order_number, g0ld_or_gray = -1, tolerance = 5, ENTER;
+ char multiplier_colour, tolerance_colour;// colours of multiplier and tolerance 
+ int  number, index, digit_order_number, g0ld_or_gray = -1, ENTER, tolerance_int = 5;
  unsigned long hundreds, tens, ones, multiplier_int;
  unsigned long long result_int;
  float multiplier_float, result_float;
+
 //___code_segment
 
   printf("\nHello, user!\nThis program is here to help you to find out the value (Ohms) of your resistor.\n\n"); 
@@ -88,12 +88,12 @@ int main ()// START of MAIN
 
 //___4th_band_(multiplier)_segment
  index = 4, digit_order_number = -1;
- fourth_colour = users_input(index);
- g0ld_or_gray = gold_or_gray(fourth_colour, index);
+ multiplier_colour = users_input(index);
+ g0ld_or_gray = gold_or_gray(multiplier_colour, index);
   if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
-   multiplier_int = int_converter(fourth_colour, digit_order_number);
+   multiplier_int = int_converter(multiplier_colour, digit_order_number);
   else
-   multiplier_float = float_converter(fourth_colour);
+   multiplier_float = float_converter(multiplier_colour);
 
 //___5th_band_tolerance_segment
  do
@@ -105,13 +105,18 @@ int main ()// START of MAIN
    switch(tolerance_colour)
    {
     case 'G':
-     tolerance *= 1;
+     tolerance_int *= 1;
+     break;
     case 'S':
-     tolerance *= 2;
+     tolerance_int *= 2;
+     break;
     case 'N':
-     tolerance *= 4;
+     tolerance_int *= 4;
+     break;
+     
    }
  }while(tolerance_colour!='G' && tolerance_colour!='S' && tolerance_colour!='N');
+
 //___total_value_segment
 // if the result is int type
 if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
@@ -120,13 +125,13 @@ if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
 
   printf("\nThe value of your resistor is: "); 
   if(result_int >= 1000000000)
-  printf("%.llu Giga Ohms +- %d", (result_int/1000000000), tolerance);
+  printf("%.llu Giga Ohms +- %d", (result_int/1000000000), tolerance_int);
   if(result_int >= 1000000 && result_int < 1000000000)
-  printf("%.2llu Mega Ohms +- %d",(result_int/1000000), tolerance);
+  printf("%.2llu Mega Ohms +- %d",(result_int/1000000), tolerance_int);
   if(result_int >= 1000 && result_int < 1000000)
-  printf("%.2llu kilo Ohms +- %d",(result_int/1000), tolerance);
+  printf("%.2llu kilo Ohms +- %d",(result_int/1000), tolerance_int);
   if(result_int < 1000)
-  printf("%.llu Ohms +- %d", result_int, tolerance);
+  printf("%.llu Ohms +- %d", result_int, tolerance_int);
  }
 // if the result is float type
  if(g0ld_or_gray == 1)
@@ -134,7 +139,7 @@ if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
  result_float = ((hundreds + tens + ones)*multiplier_float);
 
   printf("\nThe value of your resistor is: "); 
-  printf("%.2f Ohms +- %d", result_float, tolerance);
+  printf("%.2f Ohms +- %d", result_float, tolerance_int);
   }
  
 return 0;
@@ -147,10 +152,10 @@ char users_input(int index)// START of func
  char ENTER;// input for user's ENTER (buffer overflow, thanks to scanf())
  
  if(index != 4)
- printf("\n\nThe %d band has the colour of \n(tap [COLOUR] ):\n", index);
+ printf("\n\nThe %d band has the colour of \n(tap [COLOUR] ): ", index);
  else
- printf("\n\nThe MULTIPLIER band has the colour of \n(tap [COLOUR] ):\n");
-   scanf("%c",&ENTER);// this scanf (AND all others bellow with ENT) are for user's ENTER... otherwise the program does not work...
+ printf("\n\nThe MULTIPLIER band has the colour of \n(tap [COLOUR] ): ");
+   scanf("%c",&ENTER);
   scanf("%c",&band_colour); 
  band_colour = toupper(band_colour); 
   
@@ -159,16 +164,16 @@ char users_input(int index)// START of func
   {// checks if the user's input is out of the range
    printf("Oops...! There is no such a colour! Please, try again: ");// if not, then it prints that message
      scanf("%c", &ENTER);
-    scanf("%c",&band_colour);// and ask for input again
+    scanf("%c",&band_colour);// asks for input again
    band_colour = toupper(band_colour);
   }
 
   else
   while(band_colour!='B' && band_colour!='C' && band_colour!='R' && band_colour!='O' && band_colour!='Y' &&  band_colour!='E' && band_colour!='A' && band_colour!='V' && band_colour!='G' && band_colour!='W' && band_colour!='S' && band_colour!='N')
-  {// checks if the user's input is out of the range
-   printf("Oops...! There is no such a colour! Please, try again: ");// if not, then it prints that message
+  {
+   printf("Oops...! There is no such a colour! Please, try again: ");
      scanf("%c", &ENTER);
-    scanf("%c",&band_colour);// and ask for input again
+    scanf("%c",&band_colour);
    band_colour = toupper(band_colour);
   }
  printf("\nOK!");  
@@ -195,30 +200,31 @@ return boolean;
 }// END of func
 
 
-//START of func
- unsigned long long int_converter(char colour, int digit_order_number)
+
+ unsigned long long int_converter(char band_colour, int digit_order_number)// START of func
 {// array of letters which represent colours
   char colours [NUMBER_OF_COLOURS] = {'B','C','R','O','Y','E','A','V','G','W'};
 
 //___first_two_or_three_colours_segment
-  // integer version of character (char *colour) == (int band), for exp.: 'B' == 0
+  // integer version of character (char band_colour) == (int band_value), for exp.: 'B' == 0, atoi() equivalent
   unsigned long long band_value;
   // converts first three colours to int type
   for (int i = 0; i < NUMBER_OF_COLOURS; i++)
-  if(colour == colours[i])
+  if(band_colour == colours[i])
    band_value = i;   
   // is it hundreds? tens? ones?
   for(int i = 1; i <= 3; i++)
    if(digit_order_number == i)
-    band_value = band_value*(pow(10,i));// power of
-  // if there's no a 3d colour (4-band resistor)
-  if (colour == '0')
+    band_value = band_value*(pow(10,i));// pow() -> power of 10 in i
+  // if there's no a 3rd colour (4-band resistor)
+  if (band_colour == '0')
    band_value = 0;
+
 //___multiplier_segment_for_rainbow_colours
   if(digit_order_number == -1)// if [G] is for Gray
   {
    for(int i = 0; i < NUMBER_OF_COLOURS; i++)
-    if(colour == colours[i])
+    if(band_colour == colours[i])
      band_value = pow(10,i);
    }  
 
@@ -226,12 +232,12 @@ return band_value;
 }// END of func
 
 
-float float_converter(char colour)// START of func
+float float_converter(char band_colour)// START of func
 {//___multiplier_segment_for_Gold_&_Silver_colours
  float band_value;
  char tolerance [NUMBER_OF_TOLERANCE] = {'G','S'}; 
    for(int i = 0; i < NUMBER_OF_TOLERANCE - 1; i++)
-    if(colour == tolerance[i])
+    if(band_colour == tolerance[i])
      band_value = pow(10,-i-1);// for 0,001 or 0,01 values 
 
 return band_value;
