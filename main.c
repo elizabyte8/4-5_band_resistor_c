@@ -16,20 +16,20 @@
 
 char *interface [] = 
 {
-"\n     Colours               Multiplier value           Tolerance       Select",
-"\n*-----------------*     *--------------------*      *-----------*",    
-"\n|0 value     BLACK|     |1                   |      |           |     tap [B]"
-"\n|1 value    COFFEE|     |10                  |      |     1%    |     tap [C]",
-"\n|2 value       RED|     |100                 |      |     2%    |     tap [R]",
-"\n|3 value    ORANGE|     |1000                |      |           |     tap [O]", 
-"\n|4 value    YELLOW|     |10000               |      |           |     tap [Y]", 
-"\n|5 value   EMERALD|     |100000              |      |           |     tap [E]",
-"\n|6 value     AZURE|     |1000000             |      |           |     tap [A]",
-"\n|7 value    VIOLET|     |____________________|      |           |     tap [V] ",
-"\n|8 value      GRAY|     |0.1     GOLD  tap[G]<------>     5%    |     tap [G]",
-"\n|9 value     WHITE|     |0.01   SILVER tap[S]<------>    10%    |     tap [W]",
-"\n|    NO COLOUR    |     |        NONE  tap[N]------->    20%    ----> tap [N]"
-"\n*-----------------*     *--------------------*      *-----------*",
+"\n     Colours                Multiplier value           Tolerance        Select",
+"\n*-----------------*      *--------------------*      *-----------*",    
+"\n|0 value     BLACK| 10^0 |1                   |      |           |     tap [B]"
+"\n|1 value    COFFEE| 10^1 |10                  |      |     1%    |     tap [C]",
+"\n|2 value       RED| 10^2 |100                 |      |     2%    |     tap [R]",
+"\n|3 value    ORANGE| 10^3 |1000                |      |           |     tap [O]", 
+"\n|4 value    YELLOW| 10^4 |10000               |      |           |     tap [Y]", 
+"\n|5 value   EMERALD| 10^5 |100000              |      |           |     tap [E]",
+"\n|6 value     AZURE| 10^6 |1000000             |      |           |     tap [A]",
+"\n|7 value    VIOLET| 10^7 |____________________|      |           |     tap [V] ",
+"\n|8 value      GRAY| 10^8 |0.1<--->GOLD  tap[G]<------>     5%    |     tap [G]",
+"\n|9 value     WHITE| 10^9 |0.01<->SILVER tap[S]<------>    10%    |     tap [W]",
+"\n|    NO COLOUR    |      |        NONE  tap[N]------->    20%    ----> tap [N]"
+"\n*-----------------*      *--------------------*      *-----------*",
 };// ascii interface
 
 // funcs
@@ -64,7 +64,7 @@ int main ()// START of MAIN
     scanf("%d",&ENTER);  
  }
 
-  printf("\nNow look at the table\nAND\nChoose colours which match to the value.");
+  printf("\nNow look at the table\nAND\nChoose colour which match to the value.");
   printf("\n\n\n\t\t\t\t     <<Table of colours and their values>>\n\n");
   for(int i = 0; i < 12; i++)// prints ascii interface with colours values
   printf("%s", interface[i]); 
