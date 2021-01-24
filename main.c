@@ -63,7 +63,7 @@ int main ()// START of MAIN
     scanf("%d",&ENTER);  
  }
 
-  printf("\nNow look at the table\nAND\nChoose colour which match to the value.");
+  printf("\nNow look at the table\nAND\nChoose colour which matches to the value.");
   printf("\n\n\n\t\t\t\t     <<Table of colours and their values>>\n\n");
   for(int i = 0; i < 12; i++)// prints ascii interface with colours values
   printf("%s", interface[i]); 
