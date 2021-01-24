@@ -113,7 +113,6 @@ int main ()// START of MAIN
     case 'N':
      tolerance_int *= 4;
      break;
-     
    }
  }while(tolerance_colour!='G' && tolerance_colour!='S' && tolerance_colour!='N');
 
