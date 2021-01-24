@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h> // I could use atoi(), but I won't
-// because this code was written 12 months ago (when I was unexperciend at programming [just a 4-month baby], I didn't know
-// about that func xD
+#include <stdlib.h> // for func
 #include <ctype.h>  // for func toupper()
 #include <math.h>   // for func pow()
 
@@ -46,9 +44,8 @@ int main ()// START of MAIN
  unsigned long hundreds, tens, ones, multiplier_int;
  unsigned long long result_int;
  float multiplier_float, result_float;
- 
 //___code_segment
- 
+
   printf("\nHello, user!\nThis program is here to help you to find out the value (Ohms) of your resistor.\n\n"); 
   printf("All you need is to know the colours of your resistor.\n\nGive the desired number of bands (4 or 5 only)\n"); 
    scanf("%d",&number);
@@ -99,18 +96,22 @@ int main ()// START of MAIN
    multiplier_float = float_converter(fourth_colour);
 
 //___5th_band_tolerance_segment
-  printf("\nThe TOLERANCE has the colour of: ");
+ do
+ {
+  printf("\n\nThe TOLERANCE has the colour of\n(only [G]old, [S]ilver & [N]one): ");
     scanf("%d", &ENTER);
    scanf("%c",&tolerance_colour);
    tolerance_colour = toupper(tolerance_colour);
    switch(tolerance_colour)
    {
+    case 'G':
+     tolerance *= 1;
     case 'S':
      tolerance *= 2;
     case 'N':
      tolerance *= 4;
    }
-
+ }while(tolerance_colour!='G' && tolerance_colour!='S' && tolerance_colour!='N');
 //___total_value_segment
 // if the result is int type
 if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
