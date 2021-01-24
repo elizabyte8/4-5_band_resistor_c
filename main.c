@@ -1,3 +1,10 @@
+/************************************************************
+*** Title: rEsIsToЯ_bAnD_сОl0ur_CoDe__CaLcUlAt0Я ************
+*** Author: cold_summer aka Elizabeth Maslennikova **********
+*** Date: ~01/12/2020 *************************************** yes, it was written in 2020
+*** Description: Save my farm from rodents invasion *********
+************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h> // for func
 #include <ctype.h>  // for func toupper()
