@@ -137,13 +137,13 @@ if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
 
   printf("\nThe value of your resistor is: "); 
   if(result_int >= 1000000000)
-  printf("%.llu Giga Ohms +- %d%%", (result_int/1000000000), tolerance_int);
+  printf("%.1llu Giga Ohms +- %d%%", (result_int/1000000000), tolerance_int);
   if(result_int >= 1000000 && result_int < 1000000000)
-  printf("%.2llu Mega Ohms +- %d%%",(result_int/1000000), tolerance_int);
+  printf("%.1llu Mega Ohms +- %d%%",(result_int/1000000), tolerance_int);
   if(result_int >= 1000 && result_int < 1000000)
-  printf("%.2llu kilo Ohms +- %d%%",(result_int/1000), tolerance_int);
+  printf("%.1llu kilo Ohms +- %d%%",(result_int/1000), tolerance_int);
   if(result_int < 1000)
-  printf("%.llu Ohms +- %d%%", result_int, tolerance_int);
+  printf("%.1llu Ohms +- %d%%", result_int, tolerance_int);
  }
 // if the result is float type
  if(g0ld_or_gray == 1)
@@ -151,7 +151,7 @@ if(g0ld_or_gray == 0 || g0ld_or_gray == -1)
  result_float = ((hundreds + tens + ones)*multiplier_float);
 
   printf("\nThe value of your resistor is: "); 
-  printf("%.2f Ohms +- %d%%", result_float, tolerance_int);
+  printf("%.3f Ohms +- %d%%", result_float, tolerance_int);
   }
  
 return 0;
