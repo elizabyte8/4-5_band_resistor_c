@@ -5,7 +5,7 @@
 ************************************************************/
 
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <ctype.h>  // for func toupper()
 #include <math.h>   // for func pow()
 
@@ -15,7 +15,7 @@
 
 char *interface [] = 
 {
-"\n      Colours               Multiplier values          Tolerance        Select",
+"\n      Colours              Multiplier  values          Tolerance       Select",
 "\n*-----------------*      *--------------------*      *-----------*",    
 "\n|0 value     BLACK| 10^0 |1                   |      |           |     tap [B]"
 "\n|1 value    COFFEE| 10^1 |10                  |      |     1%    |     tap [C]",
@@ -64,7 +64,7 @@ int main ()// START of MAIN
  }
 
   printf("\nNow look at the table\nAND\nChoose colour which matches to the value.");
-  printf("\n\n\n\t\t\t\t     <<Table of colours and their values>>\n\n");
+  printf("\n\n\n\t\t\t\t     << Table of colours and their values >>\n\n");
   for(int i = 0; i < 12; i++)// prints ascii interface with colours values
   printf("%s", interface[i]); 
   printf("\n\nChoose the colours");
