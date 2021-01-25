@@ -5,7 +5,7 @@
 ************************************************************/
 
 #include <stdio.h>
-#include <stdlib.h> // for func
+#include <stdlib.h> 
 #include <ctype.h>  // for func toupper()
 #include <math.h>   // for func pow()
 
@@ -69,7 +69,7 @@ int main ()// START of MAIN
   printf("%s", interface[i]); 
   printf("\n\nChoose the colours");
 
-//___1rd_band_(colour)_segment
+//___1st_band_(colour)_segment
  index = 1, digit_order_number = 2;
  first_colour = users_input(index);
  g0ld_or_gray = gold_or_gray(first_colour, index);
